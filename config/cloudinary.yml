@@ -1,0 +1,18 @@
+development:
+  cloud_name: dlynis9bs
+  api_key: '761991113345198'
+  api_secret: QYiX8rQRwGZq5SUqPZzi02NAGkA
+  enhance_image_tag: true
+  static_file_support: false
+production:
+  cloud_name: dlynis9bs
+  api_key: '761991113345198'
+  api_secret: QYiX8rQRwGZq5SUqPZzi02NAGkA
+  enhance_image_tag: true
+  static_file_support: true
+test:
+  cloud_name: dlynis9bs
+  api_key: '761991113345198'
+  api_secret: QYiX8rQRwGZq5SUqPZzi02NAGkA
+  enhance_image_tag: true
+  static_file_support: false
