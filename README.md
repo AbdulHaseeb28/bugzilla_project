@@ -1,1 +1,1 @@
-# bugzilla_project
+# buzilla_project
