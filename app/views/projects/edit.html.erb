@@ -1,0 +1,7 @@
+<%= form.label :user_ids, 'Users' %>
+<% @users.each do |user| %>
+  <label>
+    <%= check_box_tag 'project[user_ids][]', user.id, @project.users.include?(user) %>
+    <%= user.name %>
+  </label><br>
+<% end %>

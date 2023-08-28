@@ -1,0 +1,8 @@
+<h1><%= @project.name %> Project</h1>
+
+<h2>Bugs</h2>
+<ul>
+  <% @project.bugs.each do |bug| %>
+    <li><%= bug.title %></li>
+  <% end %>
+</ul>

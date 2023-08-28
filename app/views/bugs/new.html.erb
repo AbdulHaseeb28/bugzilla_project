@@ -1,0 +1,29 @@
+<h1>New Bug</h1>
+
+<%= button_to "logout", destroy_user_session_path, method: :delete  %>
+
+<%= form_with(model: @bug, url: bugs_path, local: true) do |form| %>
+  <%= form.label :title %>
+  <%= form.text_field :title %>
+
+  <%= form.label :description %>
+  <%= form.text_area :description %>
+
+  <%= form.label :deadline %>
+  <%= form.date_field :deadline %>
+
+  <%= form.label :screenshot %>
+  <%= form.file_field :screenshot %>
+
+  <%= form.label :type %>
+  <%= form.select :type, ['feature', 'bug'] %>
+
+  <%= form.label :status %>
+  <%= form.select :status, ['new', 'started', 'completed'] %>
+
+  <%= form.label :project_id %>
+  <%= form.collection_select :project_id, Project.all, :id, :name %>
+
+
+  <%= form.submit %>
+<% end %>
