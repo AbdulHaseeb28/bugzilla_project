@@ -1,0 +1,13 @@
+<h1>Bug Details</h1>
+<p><strong>Title:</strong> <%= @bug.title %></p>
+<p><strong>Description:</strong> <%= @bug.description %></p>
+<p><strong>Deadline:</strong> <%= @bug.deadline %></p>
+<p><strong>Type:</strong> <%= @bug.type %></p>
+<p><strong>Status:</strong> <%= @bug.status %></p>
+<p><strong>Project:</strong> <%= @bug.project.name %></p>
+<p><strong>Creator:</strong> <%= @bug.user.name %></p>
+<p><strong>Developer:</strong> <%= @bug.developer ? @bug.developer.name : 'Not assigned' %></p>
+<% if @bug.screenshot.present? %>
+  <p><strong>Screenshot:</strong></p>
+  <%= image_tag @bug.screenshot.url, alt: 'Screenshot' %>
+<% end %>
