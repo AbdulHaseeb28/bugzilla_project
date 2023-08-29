@@ -19,7 +19,7 @@ class Bug < ApplicationRecord
       end
     elsif type == 'bug'
       unless %w(new started resolved).include?(status)
-        errors.add(:status, 'Status must be new, started, or resolved for a bug')
+        errors.add(:status, 'Invalid status for a feature. Choose from: new, started, or completed.')
       end
     end
   end

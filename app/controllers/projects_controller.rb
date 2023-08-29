@@ -1,14 +1,22 @@
 class ProjectsController < ApplicationController
   def index
-      @projects = Project.all
+    @projects = Project.all
   end
 
   def show
-    @project = Project.find(params[:id])
+    @project = Project.find_by(id: params[:id])
+
+      if @project.nil?
+        redirect_to projects_path, alert: 'Project not found.'
+      end
   end
 
   def new
-    @project = Project.new if current_user.manager?
+    if current_user.manager?
+      @project = Project.new
+    else
+      redirect_to projects_path, alert: "You are not authorized to create a new project."
+    end
   end
   
   def create
@@ -16,7 +24,7 @@ class ProjectsController < ApplicationController
     @project.user = current_user # Assuming you're associating the project with the current user
 
     if @project.save
-      redirect_to projects_path, notice: 'Project was successfully created.'
+      redirect_to @projects, notice: 'Project was successfully created.'
     else
       render :new
     end
