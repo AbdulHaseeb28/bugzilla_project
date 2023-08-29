@@ -16,6 +16,10 @@
     <%= f.text_field :username, autofocus: true, autocomplete: "email" , class:'form-control form-control-lg'%>
   </div>
     <div class="form-group">
+      <%= f.label :user_type, class: 'form-label mb-2' %>
+      <%= f.select :user_type, ['Manager', 'Developer', 'QA'], {}, class: 'form-control form-control-lg' %>
+    </div>
+    <div class="form-group">
       <%= f.label :password , class: 'form-label mb-2 mt-2' %>
       <% if @minimum_password_length %>
       <em>(<%= @minimum_password_length %> characters minimum)</em>

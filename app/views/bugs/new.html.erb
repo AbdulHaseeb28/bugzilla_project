@@ -1,19 +1,40 @@
-<h1>New Bug</h1>
-<%= button_to "logout", destroy_user_session_path, method: :delete  %>
-<%= form_with(model: @bug, url: bugs_path, local: true) do |form| %>
-  <%= form.label :title %>
-  <%= form.text_field :title %>
-  <%= form.label :description %>
-  <%= form.text_area :description %>
-  <%= form.label :deadline %>
-  <%= form.date_field :deadline %>
-  <%= form.label :screenshot %>
-  <%= form.file_field :screenshot %>
-  <%= form.label :type %>
-  <%= form.select :type, ['feature', 'bug'] %>
-  <%= form.label :status %>
-  <%= form.select :status, ['new', 'started', 'completed'] %>
-  <%= form.label :project_id %>
-  <%= form.collection_select :project_id, Project.all, :id, :name %>
-  <%= form.submit %>
-<% end %>
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+      <h1 class="text-center mb-4">New Bug</h1>
+      <%= form_with(model: @bug, url: bugs_path, local: true) do |form| %>
+        <div class="form-group">
+          <%= form.label :title %>
+          <%= form.text_field :title, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= form.label :description %>
+          <%= form.text_area :description, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= form.label :deadline %>
+          <%= form.date_field :deadline, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= form.label :screenshot %>
+          <%= form.file_field :screenshot, class: "form-control-file" %>
+        </div>
+        <div class="form-group">
+          <%= form.label :type %>
+          <%= form.select :type, ['feature', 'bug'], {}, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= form.label :status %>
+          <%= form.select :status, ['new', 'started', 'completed'], {}, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= form.label :project_id %>
+          <%= form.collection_select :project_id, Project.all, :id, :name, {}, class: "form-control" %>
+        </div>
+        <div class="form-group text-center">
+          <%= form.submit "Create Bug", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
