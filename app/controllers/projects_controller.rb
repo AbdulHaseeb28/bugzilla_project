@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
     if @project.save
       redirect_to projects_path, notice: 'Project was successfully created.'
     else
-      render :index
+      render :new
     end
   end
 
@@ -29,6 +29,7 @@ class ProjectsController < ApplicationController
 
   def update
     @project = Project.find(params[:id])
+
     if @project.update(project_params)
       redirect_to @project, notice: 'Project was successfully updated.'
     else
