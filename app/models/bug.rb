@@ -1,6 +1,7 @@
 class Bug < ApplicationRecord
   self.inheritance_column = :bug_type
-  belongs_to :user #creater
+  # belongs_to :user #creater
+  belongs_to :creator, class_name: 'User', foreign_key: :creator_id
   belongs_to :developer, class_name: 'User', foreign_key: 'developer_id', optional: true # Developer 
   belongs_to :project #project
    #validations
@@ -25,8 +26,13 @@ class Bug < ApplicationRecord
   end
 
   def valid_screenshot_format
-    if screenshot.present? && !screenshot.file.extension.downcase.in?(%w(png gif))
+    if screenshot.present? && !valid_screenshot_extension?
       errors.add(:screenshot, 'should be in PNG or GIF format')
     end
+  end
+
+  def valid_screenshot_extension?
+    allowed_extensions = %w(image/png image/gif)
+    allowed_extensions.include?(screenshot.content_type)
   end
 end
