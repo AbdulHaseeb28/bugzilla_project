@@ -1,3 +1,4 @@
+# This is the main application configuration class for BugzillaProject.
 require_relative 'boot'
 
 require 'rails/all'

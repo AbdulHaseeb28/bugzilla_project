@@ -1,3 +1,4 @@
+#user model
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -9,7 +10,7 @@ class User < ApplicationRecord
   has_many :managed_projects, through: :manager, class_name: 'Project'
   has_many :created_bugs, class_name: 'Bug', foreign_key: 'creator_id'
   has_many :assigned_bugs, class_name: 'Bug', foreign_key: 'developer_id'
-  has_many :bugs, foreign_key: :creator_id
+  has_many :bugs
 
   validates :username, presence: true
   validates :email, presence: true, uniqueness: true

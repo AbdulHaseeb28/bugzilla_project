@@ -1,3 +1,4 @@
+#bug model
 class Bug < ApplicationRecord
   self.inheritance_column = :bug_type
   # belongs_to :user #creater
