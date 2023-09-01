@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+# Controller for managing bugs.
+
 class BugsController < ApplicationController
   def index
     @bug = Bug.all
