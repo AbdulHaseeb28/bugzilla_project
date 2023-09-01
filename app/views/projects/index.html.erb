@@ -1,22 +1,39 @@
-<div class="container">
-  <div class="row justify-content-center mt-5">
-    <div class="col-md-8">
-      <h1 class="text-center mb-4">Projects</h1>
-
-      <!-- Add the form for creating a new project -->
-      <%= form_with(model: Project.new, url: projects_path, local: true) do |form| %>
-        <div class="form-group">
-          <%= form.label :name %>
-          <%= form.text_field :name, class: "form-control" %>
-        </div>
-        <div class="form-group">
-          <%= form.label :description %>
-          <%= form.text_area :description, class: "form-control" %>
-        </div>
-        <div class="text-center">
-          <%= form.submit "Create Project", class: "btn btn-primary" %>
-        </div>
-      <% end %>
+<div class="container mt-5" style="text-align: center; background-color: #f5f5f5; padding: 20px;">
+  <h2 class="mb-4">Projects</h2>
+  
+  <% if current_user.manager? %>
+    <div class="mb-2">
+      <%= link_to 'Create New Project', new_project_path, class: "btn btn-success" %>
     </div>
-  </div>
+  <% end %>
+  
+  <% @projects.order(created_at: :desc).each do |project| %>
+    <div class="card mb-4" style="background-color: grey;">
+      <div class="card-body">
+        <% if current_user.manager? %>
+          <div class="mb-2">
+            <%= link_to 'Edit Project', edit_project_path(project), class: "btn btn-success mr-2" %>
+            <%= link_to 'Delete Project', delete_project_path(project), method: :delete, data: { confirm: 'Are you sure you want to delete this project?' }, class: "btn btn-danger" %>
+          </div>
+        <% end %>
+        <h2><strong>Title:</strong> <%= project.name %></h2>
+        <p><strong>Description:</strong> <%= project.description %></p>
+        <% if current_user.qa? %>
+          <%= link_to 'Create New Bug', new_bug_path(@project), class: 'btn btn-success' %>
+        <% end %>
+        <h3>Developers</h3>
+        <ul>
+          <% project.users.developer.each do |developer| %>
+            <li><%= developer.name %> (<%= link_to 'Remove', remove_developer_from_project_path(project, user_id: developer.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "text-danger" %>)</li>
+          <% end %>
+        </ul>
+        <h3>QAs</h3>
+        <ul>
+          <% project.users.qa.each do |qa| %>
+            <li><%= qa.name %> (<%= link_to 'Remove', remove_qa_from_project_path(project, user_id: qa.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "text-danger" %>)</li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
 </div>

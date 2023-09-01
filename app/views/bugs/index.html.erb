@@ -1,6 +1,6 @@
 <div class="text-center">
   <h1>Bugs Index Page</h1>
-  <%= link_to 'Create New Bug', new_bug_path, class: 'btn btn-primary' %>
+  
   <ul class="list-unstyled mx-auto">
     <% @bug.each do |bug| %>
       <li><%= bug.title %></li>
