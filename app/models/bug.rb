@@ -8,14 +8,14 @@ class Bug < ApplicationRecord
    #validations
   validates :title, presence: true, uniqueness: { scope: :project_id }
   validates :status,presence: true, inclusion: { in: %w(new started completed) }
-  validates :type, presence: true, inclusion: { in: %w(feature bug) }
+  validates :type, presence: true, inclusion: { in: %w[feature bug] }
   validate :valid_screenshot_format
   validate :validate_status_based_on_type
 
   private
 
   def validate_status_based_on_type
-    if type == 'feature'
+    if type.eql?('feature')
       unless %w(new started completed).include?(status)
         errors.add(:status, 'Status must be new, started, or completed for a feature')
       end
